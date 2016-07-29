@@ -32,6 +32,8 @@ PImage hpImg;
 void setup(){
   size(640, 480);
   
+    gameState = GAME_START;
+  
     b = 0;
     fX = width*2/3;
     fY = height/2;
@@ -60,8 +62,7 @@ void setup(){
 
 void draw(){
   background(0);
-  
-
+//game start  
  switch(gameState){   
     case GAME_START:
     image(startOneImg, 0, 0);
@@ -73,9 +74,8 @@ void draw(){
          }
       }   
  } 
-  
+//game run
  switch(gameState){
-
     case GAME_RUN:    
 //background    
     b += 2;
@@ -85,7 +85,7 @@ void draw(){
     image(backgroundFormerImg,b-1280,0);    
 //blood
     fill(#ff0000);
-    rect(8,4,blood,17);
+    rect(8, 4, blood, 17);
     image(hpImg,0,0);
     
     image(treasureImg,tX,tY);  
@@ -110,19 +110,17 @@ void draw(){
     if(y >= eY && y <= eY+61){
       blood -= 40;
       eX = 0;
-    }else{
-      blood += 0;
     }
   }
   
   if(blood >= TOTAL_BLOOD){
     blood = TOTAL_BLOOD;
-  }
-  
+  } 
   if(blood <= 0){
     gameState = GAME_OVER;
+    blood = 40;
   }
-
+  
 //fighter
   if (upPressed) {
     y -= speed;
@@ -135,8 +133,7 @@ void draw(){
   }
   if (rightPressed) {
     x += speed;
-  }
-    
+  }   
 //boundary detection
   if (x < 0 || x > width-61){
     speed *= -1;
@@ -144,12 +141,10 @@ void draw(){
   if (y < 0 || y > height-61){
     speed *= -1;
   }
-
   image(fighterImg, x, y);
  }  
-
-switch(gameState){
-  
+//game over
+  switch(gameState){ 
     case GAME_OVER:
       image(endOneImg, 0, 0);
       if(mouseX > 216 && mouseX < 425 && mouseY > 316 && mouseY < 341){        
