@@ -65,12 +65,12 @@ void draw(){
 //game start  
  switch(gameState){   
     case GAME_START:
-    image(startOneImg, 0, 0);
+    image(startTwoImg, 0, 0);
       if(mouseX > 209 && mouseX < 453 && mouseY > 380 && mouseY < 413){        
         if(mousePressed){
           gameState = GAME_RUN;          
         }else{
-          image(startTwoImg, 0, 0);
+          image(startOneImg, 0, 0);
          }
       }   
  } 
@@ -83,11 +83,7 @@ void draw(){
     image(backgroundFormerImg,b,0);
     image(backgroundLaterImg,b-640,0);
     image(backgroundFormerImg,b-1280,0);    
-//blood
-    fill(#ff0000);
-    rect(8, 4, blood, 17);
-    image(hpImg,0,0);
-    
+//treasure    
     image(treasureImg,tX,tY);  
     if(x >= tX && x <= tX+41){
       if(y >= tY && y <= tY+41){
@@ -122,6 +118,8 @@ void draw(){
   }
   
 //fighter
+  image(fighterImg, x, y);
+  
   if (upPressed) {
     y -= speed;
   }
@@ -135,23 +133,35 @@ void draw(){
     x += speed;
   }   
 //boundary detection
-  if (x < 0 || x > width-61){
-    speed *= -1;
-  }
-  if (y < 0 || y > height-61){
-    speed *= -1;
-  }
-  image(fighterImg, x, y);
+  if (x < 0){x = 0;}
+  if (x > width-61){x = width - 61;}
+  if (y < 0){y = 0;}
+  if (y > height-61){y = height - 61;}
+  
+//blood
+    fill(#ff0000);
+    rect(8, 4, blood, 17);
+    image(hpImg,0,0);
  }  
 //game over
   switch(gameState){ 
     case GAME_OVER:
-      image(endOneImg, 0, 0);
+      image(endTwoImg, 0, 0);
       if(mouseX > 216 && mouseX < 425 && mouseY > 316 && mouseY < 341){        
         if(mousePressed){
           gameState = GAME_START;
+              fX = width*2/3;
+              fY = height/2;
+              eX = 0;
+              eY = floor(random(400));
+
+              tX = floor(random(550));
+              tY = floor(random(400));
+    
+              x = width*3/4;
+              y = floor(random(400));
         }else{
-          image(endTwoImg, 0, 0);
+          image(endOneImg, 0, 0);
          }
       }          
    }  
