@@ -85,25 +85,26 @@ void draw(){
     image(backgroundFormerImg,b-1280,0);    
 //treasure    
     image(treasureImg,tX,tY);  
-    if(x >= tX && x <= tX+41){
-      if(y >= tY && y <= tY+41){
+    if(x+51 >= tX && x <= tX+41){
+      if(y+51 >= tY && y <= tY+41){
          blood += 20;
          tX = floor(random(550));
          tY = floor(random(400));
       }
     }
 //enemy    
-    eX +=3;
+    eX +=4;
     eX %=640;
     image(enemyImg,eX,eY);
-    if(eX < x - 65){
-      eY = y;
+    if(eX < x+61){
+      eY += (61+y-eY+50)/50;
     }else{
       eY += 0;
     }
+
     
-  if(x >= eX && x <= eX+61){
-    if(y >= eY && y <= eY+61){
+  if(x+61 >= eX && x <= eX+61){
+    if(y+51 >= eY && y <= eY+61){
       blood -= 40;
       eX = 0;
     }
@@ -150,16 +151,16 @@ void draw(){
       if(mouseX > 216 && mouseX < 425 && mouseY > 316 && mouseY < 341){        
         if(mousePressed){
           gameState = GAME_START;
-              fX = width*2/3;
-              fY = height/2;
-              eX = 0;
-              eY = floor(random(400));
-
-              tX = floor(random(550));
-              tY = floor(random(400));
+            fX = width*2/3;
+            fY = height/2;
+            eX = 0;
+            eY = floor(random(400));
+            
+            tX = floor(random(550));
+            tY = floor(random(400));
     
-              x = width*3/4;
-              y = floor(random(400));
+            x = width*3/4;
+            y = floor(random(400));
         }else{
           image(endOneImg, 0, 0);
          }
